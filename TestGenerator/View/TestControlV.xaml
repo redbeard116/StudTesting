@@ -1,0 +1,55 @@
+﻿<Window x:Class="TestGenerator.View.TestControlV"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestGenerator.View"
+        xmlns:vm="clr-namespace:TestGenerator.ViewModel"
+        d:DataContext="{d:DesignInstance Type=vm:TestControlVM, IsDesignTimeCreatable=False}"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Управление тестом" MaxHeight="230" Width="230">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Margin="5"
+                    Visibility="{Binding StackVisible}">
+            <TextBlock>
+                <Label Content="Название теста:"/>
+                <TextBox Text="{Binding TestName}"
+                         Width="100"/>
+            </TextBlock>
+            <TextBlock>
+                <Label Content="Количество вопросов:"/>
+                <ComboBox ItemsSource="{Binding CountQuestion}"
+                          SelectedItem="{Binding SelectCount}"/>
+            </TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1"
+                    Margin="5"
+                    Height="100">
+            <TextBlock>
+                <Label Content="Логин:"/>
+                <TextBox Text="{Binding Login}"
+                         Width="100"/>
+            </TextBlock>
+            <TextBlock>
+                <Label Content="Пароль:"/>
+                <TextBox Text="{Binding Password}"
+                         Width="100"/>
+            </TextBlock>
+            <Button Margin="12"
+                    Content="{Binding Content}"
+                    Command="{Binding OpenCommandCmd}"/>
+        </StackPanel>
+    </Grid>
+</Window>

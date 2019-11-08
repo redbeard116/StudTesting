@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="TestGenerator.View.Users"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TestGenerator.ViewModel"
+        d:DataContext="{d:DesignInstance Type=vm:EditUserVM, IsDesignTimeCreatable=False}"
+        mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        d:DesignHeight="300" d:DesignWidth="350">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <TextBlock>
+                    <Label Content="Пользователь"/>
+                    <Label Content="Роль"
+                           Margin="45,0,0,0"/>
+            </TextBlock>
+            <ListBox ItemsSource="{Binding EditUsers}"
+                     SelectedItem="{Binding SelectUser}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Path=FullName}"/>
+                            <Label Content="{Binding Path=Role.RoleType}"
+                               Margin="70,0,0,0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Visibility="{Binding CurrentUser}">
+            <TextBlock>
+            <Label Content="Фамилия:"/>
+            <TextBox Text ="{Binding SelectUser.User.FirstName}"
+                     Width="75"/>
+            </TextBlock>
+            <TextBlock>
+            <Label Content="Имя:"/>
+            <TextBox Text ="{Binding SelectUser.User.SecondName}"
+                     Margin="30,0,0,0"
+                     Width="75"/>
+            </TextBlock>
+            <TextBlock>
+            <Label Content="Логин:"/>
+            <TextBox Text ="{Binding SelectUser.User.Login}"
+                     Margin="19,0,0,0"
+                     Width="75"/>
+            </TextBlock>
+            <TextBlock >
+            <Label Content="Пароль:"/>
+            <TextBox Text ="{Binding SelectUser.User.Password}"
+                     Margin="10,0,0,0"
+                     Width="75"/>
+            </TextBlock>
+            <TextBlock>
+            <Label Content="Роль:"/>
+            <ComboBox Text ="{Binding SelectUser.Role.RoleType}"
+                      ItemsSource="{Binding Roles}"
+                      DisplayMemberPath="RoleType"
+                      Margin="25,0,0,0"
+                      Width="75"/>
+            </TextBlock>
+            <Button 
+                Content="Изменить"
+                VerticalAlignment="Center"
+                Margin="30,20,30,0"
+                Command="{Binding EditUserCmd}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

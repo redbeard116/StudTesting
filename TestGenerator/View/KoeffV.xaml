@@ -1,0 +1,39 @@
+﻿<Window x:Class="TestGenerator.View.KoeffV"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TestGenerator.ViewModel"
+        d:DataContext="{d:DesignInstance Type=vm:KoeffVM, IsDesignTimeCreatable=False}"
+        mc:Ignorable="d"
+        xmlns:WpfCharts="clr-namespace:WpfCharts;assembly=WpfCharts"
+        Name="koeff"
+        Title="Таблица способностей" Height="350" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              Margin="10"
+              Width="250"
+              Height="250">
+            <WpfCharts:SpiderChart
+                Lines="{Binding Lines}" 
+                               Axis="{Binding Axes}" 
+                               Minimum="0" 
+                               Maximum="1" 
+                               Ticks="5" 
+                               ShowLegend="True" 
+                               LegendLocation="BottomRight"
+                               LegendBackgroundColor="Aquamarine"/>
+        </Grid>
+        <Button Grid.Row="1"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="0,5,5,0"
+                Content="Закрыть"
+                Command="{Binding CloseCmd}"
+                CommandParameter="{Binding ElementName=koeff}"/>
+    </Grid>
+</Window>
